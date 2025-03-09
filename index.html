@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <title>NS6 LAB - Software Development Solutions</title>
+    <style>
+      :root {
+        --primary: #1a73e8;
+        --secondary: #34a853;
+        --dark: #202124;
+        --light: #f8f9fa;
+        --gray: #5f6368;
+        --ferrari_red: #ff2800;
+        --carcoal_black: #2c2c2c;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        line-height: 1.6;
+        color: var(--dark);
+        background-color: var(--light);
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      /* Header styles */
+      header {
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--ferrari_red);
+        text-decoration: none;
+      }
+
+      .logo span {
+        color: var(--carcoal_black);
+      }
+
+      .nav-links {
+        display: flex;
+        list-style: none;
+      }
+
+      .nav-links li {
+        margin-left: 30px;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .mobile-menu {
+        display: none;
+        font-size: 24px;
+        cursor: pointer;
+      }
+
+      /* Hero section */
+      .hero {
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        background: linear-gradient(
+          135deg,
+          rgba(26, 115, 232, 0.1),
+          rgba(52, 168, 83, 0.1)
+        );
+        margin-top: 70px;
+      }
+
+      .hero-content {
+        max-width: 600px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        margin-bottom: 20px;
+        line-height: 1.2;
+      }
+
+      .hero p {
+        font-size: 18px;
+        margin-bottom: 30px;
+        color: var(--gray);
+      }
+
+      .btn {
+        display: inline-block;
+        background-color: var(--primary);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: 500;
+        transition: background-color 0.3s;
+      }
+
+      .btn:hover {
+        background-color: #0d62d0;
+      }
+
+      .btn-outline {
+        background-color: transparent;
+        border: 2px solid var(--primary);
+        color: var(--primary);
+        margin-left: 15px;
+      }
+
+      .btn-outline:hover {
+        background-color: var(--primary);
+        color: white;
+      }
+
+      /* Sections */
+      section {
+        padding: 80px 0;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 60px;
+      }
+
+      .section-title h2 {
+        font-size: 36px;
+        margin-bottom: 15px;
+      }
+
+      .section-title p {
+        color: var(--gray);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Services */
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .service-card {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .service-icon {
+        font-size: 40px;
+        color: var(--primary);
+        margin-bottom: 20px;
+      }
+
+      .service-card h3 {
+        margin-bottom: 15px;
+      }
+
+      /* About */
+      .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+      }
+
+      .about-text h3 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .about-image img {
+        width: 100%;
+        border-radius: 10px;
+      }
+
+      /* Projects */
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+      }
+
+      .project-card {
+        background-color: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .project-image {
+        height: 200px;
+        background-color: #e0e0e0;
+      }
+
+      .project-content {
+        padding: 20px;
+      }
+
+      .project-content h3 {
+        margin-bottom: 10px;
+      }
+
+      .contact-info {
+        margin-bottom: 20px;
+        text-align: center;
+      }
+
+      .contact-info i {
+        color: var(--primary);
+        margin-right: 10px;
+      }
+
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+
+      .contact-form textarea {
+        height: 150px;
+      }
+
+      /* Footer */
+      footer {
+        background-color: var(--dark);
+        color: white;
+        padding: 60px 0 20px;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+        color: var(--light);
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: #aaa;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-column ul li a:hover {
+        color: white;
+      }
+
+      .copyright {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #aaa;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .nav-links {
+          display: none;
+        }
+
+        .mobile-menu {
+          display: block;
+        }
+
+        .hero h1 {
+          font-size: 36px;
+        }
+
+        .about-content,
+        .contact-container {
+          grid-template-columns: 1fr;
+        }
+
+        .about-image {
+          order: -1;
+        }
+
+        .about-content img {
+          max-width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <div class="container">
+        <nav class="navbar">
+          <a class="logo">NS6 <span>LAB</span></a>
+          <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#about">About Us</a></li>
+            <!-- <li><a href="#projects">Projects</a></li> -->
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          <div class="mobile-menu">☰</div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="container">
+        <div class="hero-content">
+          <h1>Innovative Software Solutions for Your Business</h1>
+          <p>
+            At NS6 LAB, we transform ideas into powerful, scalable software
+            products that drive business growth and digital transformation.
+          </p>
+          <a href="#contact" class="btn">Get in Touch</a>
+          <a href="#services" class="btn btn-outline">Our Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Services</h2>
+          <p>
+            We offer a comprehensive range of software development services
+            tailored to meet your business needs.
+          </p>
+        </div>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">🖥️</div>
+            <h3>Custom Software Development</h3>
+            <p>
+              We design and develop bespoke software solutions that align
+              perfectly with your business requirements and objectives.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">📱</div>
+            <h3>Mobile App Development</h3>
+            <p>
+              Create engaging, high-performance mobile applications for iOS and
+              Android platforms that deliver exceptional user experiences.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🌐</div>
+            <h3>Web Application Development</h3>
+            <p>
+              Build scalable, responsive web applications using cutting-edge
+              technologies that help your business thrive online.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">☁️</div>
+            <h3>Cloud Solutions</h3>
+            <p>
+              Leverage the power of cloud computing with our tailored cloud
+              migration, integration, and management services.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🤖</div>
+            <h3>AI & Machine Learning</h3>
+            <p>
+              Implement intelligent automation and data-driven insights with our
+              AI and machine learning development services.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">🔒</div>
+            <h3>Cybersecurity Services</h3>
+            <p>
+              Protect your digital assets with our comprehensive security
+              solutions, including threat assessment and vulnerability
+              management.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" style="background-color: #f0f4f8">
+      <div class="container">
+        <div class="section-title">
+          <h2>About NS6 LAB</h2>
+          <p>
+            Learn about our journey, mission, and the values that drive our
+            success.
+          </p>
+        </div>
+        <div class="about-content">
+          <div class="about-text">
+            <h3>Who We Are</h3>
+            <p>
+              NS6 LAB is a forward-thinking software development company
+              dedicated to delivering innovative solutions that empower
+              businesses to succeed in the digital age. Founded with a passion
+              for technology and a commitment to excellence, we've been helping
+              clients across various industries transform their ideas into
+              reality.
+            </p>
+            <p>
+              Our team of skilled developers, designers, and strategists work
+              collaboratively to create software solutions that not only meet
+              but exceed our clients' expectations. We pride ourselves on our
+              ability to understand complex business challenges and develop
+              tailored solutions that drive growth and efficiency.
+            </p>
+            <p>
+              At NS6 LAB, we believe in building long-term partnerships with our
+              clients, providing ongoing support and maintenance to ensure their
+              continued success.
+            </p>
+          </div>
+          <div class="about-image">
+            <img
+              src="team.webp"
+              alt="NS6 LAB Team"
+              style="width: 450px; height: 400px"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <!-- <section id="projects">
+      <div class="container">
+        <div class="section-title">
+          <h2>Our Projects</h2>
+          <p>Explore some of our recent work and successful client projects.</p>
+        </div>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <h3>Enterprise Resource Planning System</h3>
+              <p>
+                A comprehensive ERP solution for a manufacturing company that
+                streamlined operations and improved productivity by 40%.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <h3>E-commerce Platform</h3>
+              <p>
+                A scalable, feature-rich e-commerce platform with integrated
+                payment systems and inventory management.
+              </p>
+            </div>
+          </div>
+          <div class="project-card">
+            <div class="project-image"></div>
+            <div class="project-content">
+              <h3>Healthcare Management System</h3>
+              <p>
+                A secure, HIPAA-compliant healthcare management system that
+                improved patient care and operational efficiency.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section> -->
+
+    <!-- Contact Section -->
+    <section id="contact">
+      <div class="container">
+        <div class="section-title">
+          <h2>Contact Us</h2>
+          <p>
+            Get in touch with our team to discuss your project or inquire about
+            our services.
+          </p>
+        </div>
+        <div class="contact-info">
+          <h3>Contact Information</h3>
+          <p>
+            <i style="font-size: 24px" class="fa">&#xf232;</i>+91 7015444976
+          </p>
+          <p><i>✉️</i>ns6.lab@gmail.com</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-column">
+            <h3>NS6 LAB</h3>
+            <p>
+              Innovative software solutions driving digital transformation and
+              business growth.
+            </p>
+          </div>
+          <div class="footer-column">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#home">Home</a></li>
+              <li><a href="#services">Services</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#projects">Projects</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div>
+          <div class="footer-column">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="#services">Custom Software</a></li>
+              <li><a href="#services">Mobile Apps</a></li>
+              <li><a href="#services">Web Applications</a></li>
+              <li><a href="#services">Cloud Solutions</a></li>
+              <li><a href="#services">AI & ML</a></li>
+            </ul>
+          </div>
+          <!-- <div class="footer-column">
+            <h3>Connect With Us</h3>
+            <ul>
+              <li><a href="#">LinkedIn</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">GitHub</a></li>
+            </ul>
+          </div> -->
+        </div>
+        <div class="copyright">
+          <p>&copy; 2025 NS6 LAB. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
